@@ -84,6 +84,10 @@ _CLONE_ALL_DEFAULT_EXCLUDE_ROOT: frozenset[str] =  frozenset({
     # (install/profile bucket split; see test_install_bucket_separation).
     ".hermes-runtime",
     "node",
+    # Kanban boards: shared by every profile and read only from the default root
+    # (``kanban_db.kanban_home``), so a clone's copy is a stale snapshot nothing reads.
+    "kanban.db", "kanban.db-wal", "kanban.db-shm", "kanban.db.init.lock", "kanban.db.dispatch.lock",
+    "kanban",
 }) | LOCAL_RUNTIME_ROOT_DIRS
 
 # Per-profile history excluded from --clone-all for ANY source: SQLite session store
